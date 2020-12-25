@@ -13,9 +13,13 @@ clean_dltc:
 clean_nlpfr:
 	rm -rf nlpfr/build nlpfr/dist nlpfr/nltk.egg-info
 
+clean_alg:
+	rm -rf alg/build alg/dist alg/alg.egg-info
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
+	make clean_alg
 
 # ======================================================================================================================
 
@@ -38,9 +42,13 @@ build_nlpfr:
 build_dltc:
 	cd dltc; python3 setup.py build; python3 setup.py sdist
 
+build_alg:
+	cd alg; python3 setup.py build; python3 setup.py dist
+
 build:
 	make build_nlpfr
 	make build_dltc
+	make build_alg
 
 # ======================================================================================================================
 
@@ -63,5 +71,10 @@ install_nlpfr:
 install_dltc:
 	cd dltc; python3 setup.py install
 
+install_alg:
+	cd alg; python3 setup.py install
+
 install:
-	make install_nlpfr install_dltc
+	make install_nlpfr
+	make install_dltc
+	make install_alg
