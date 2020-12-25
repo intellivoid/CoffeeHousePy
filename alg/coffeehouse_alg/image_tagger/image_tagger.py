@@ -34,20 +34,16 @@ class ImageTagger:
         :return:
         """
         headers = {
-            "Accept": "application/json, text/javascript",
             "Authorization": self.access_key,
             "Content-Type": "application/json",
             "Origin": "https://demos.algorithmia.com",
             "Referer": "https://demos.algorithmia.com/image-tagger",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-site",
         }
         payload = {
             "image": image_content,
             "numResults": results
         }
-        headers = Utilities.add_client_headers(headers)
+        headers = Utilities.add_client_headers(headers, True)
 
         response = requests.post(self.illustration_endpoint, data=json.dumps(payload), headers=headers)
         j_response = json.loads(response.text)
@@ -65,16 +61,12 @@ class ImageTagger:
         :return:
         """
         headers = {
-            "Accept": "application/json, text/javascript",
             "Authorization": self.access_key,
             "Content-Type": "application/json",
             "Origin": "https://demos.algorithmia.com",
-            "Referer": "https://demos.algorithmia.com/image-tagger",
-            "Sec-Fetch-Dest": "empty",
-            "Sec-Fetch-Mode": "cors",
-            "Sec-Fetch-Site": "same-site",
+            "Referer": "https://demos.algorithmia.com/image-tagger"
         }
-        headers = Utilities.add_client_headers(headers)
+        headers = Utilities.add_client_headers(headers, False)
 
         response = requests.post(self.inception_endpoint, data=json.dumps(image_content), headers=headers)
         j_response = json.loads(response.text)
