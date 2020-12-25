@@ -16,9 +16,13 @@ clean_nlpfr:
 clean_alg:
 	rm -rf alg/build alg/dist alg/alg.egg-info
 
+clean_his:
+	rm -rf hyper_internal_service/build hyper_internal_service/dist hyper_internal_service/hyper_internal_service.egg-info
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
+	make clean_his
 	make clean_alg
 
 # ======================================================================================================================
@@ -43,10 +47,14 @@ build_dltc:
 	cd dltc; python3 setup.py build; python3 setup.py sdist
 
 build_alg:
-	cd alg; python3 setup.py build; python3 setup.py dist
+	cd alg; python3 setup.py build; python3 setup.py sdist
+
+build_his:
+	cd hyper_internal_service; python3 setup.py build; python3 setup.py sdist
 
 build:
 	make build_nlpfr
+	make build_his
 	make build_dltc
 	make build_alg
 
@@ -74,7 +82,22 @@ install_dltc:
 install_alg:
 	cd alg; python3 setup.py install
 
+install_his:
+	cd hyper_internal_service; make install
+
 install:
 	make install_nlpfr
+	make install_his
 	make install_dltc
 	make install_alg
+
+# ======================================================================================================================
+
+system_prep_pip:
+	apt -y install python3 python3-distutils wget curl
+	wget https://bootstrap.pypa.io/get-pip.py
+	python3 get-pip.py
+	rm get-pip.py
+
+system_prep_gcc:
+	apt -y install gcc
