@@ -1,43 +1,31 @@
 clean:
 	# APT Mod
-	rm -rf mods/apt/build
-	rm -rf mods/apt/dist
-	rm -rf mods/apt/coffeehouse_dltc.egg-info
+	rm -rf mods/apt/build mods/apt/dist mods/apt/coffeehousemod_apt.egg-info
 
 	# Stopwords Mod
-	rm -rf mods/stopwords/build
-	rm -rf mods/stopwords/dist
-	rm -rf mods/stopwords/coffeehouse_dltc.egg-info
+	rm -rf mods/stopwords/build mods/stopwords/dist mods/stopwords/coffeehousemod_stopwords.egg-info
 
 	# Tokenizer Mod
-	rm -rf mods/tokenizer/build
-	rm -rf mods/tokenizer/dist
-	rm -rf mods/tokenizer/coffeehouse_dltc.egg-info
+	rm -rf mods/tokenizer/build mods/tokenizer/dist mods/tokenizer/coffeehousemod_tokenizer.egg-info
 
 	# Deep Learning Text Classification
-	rm -rf dltc/build
-	rm -rf dltc/dist
-	rm -rf dltc/coffeehouse_dltc.egg-info
+	rm -rf dltc/build dltc/dist dltc/coffeehouse_dltc dltc/coffeehouse_dltc.egg-info
 
 build:
 	# APT Mod
-	python3 mods/apt/setup.py build
-	python3 mods/apt/setup.py sdist
+	cd mods/apt; python3 setup.py build; python3 setup.py sdist
 
 	# Stopwords Mod
-	python3 mods/stopwords/setup.py build
-	python3 mods/stopwords/setup.py sdist
+	cd mods/stopwords; python3 setup.py build; python3 setup.py sdist
 
 	# Tokenizer Mod
-	python3 mods/tokenizer/setup.py build
-	python3 mods/tokenizer/setup.py sdist
+	cd mods/tokenizer; python3 setup.py build; python3 setup.py sdist
 
 	# Deep Learning Text Classification
-	python3 dltc/setup.py build
-	python3 dltc/setup.py sdist
+	cd dltc; python3 setup.py build; python3 setup.py sdist
 
 install:
-	python3 mods/apt/setup.py install
-	python3 mods/stopwords/setup.py install
-	python3 mods/tokenizer/setup.py install
-	python3 dltc/setup.py install
+	cd mods/apt; python3 setup.py install
+	cd mods/stopwords; python3 setup.py install
+	cd mods/tokenizer; python3 setup.py install
+	cd dltc; python3 setup.py install
