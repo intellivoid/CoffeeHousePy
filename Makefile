@@ -94,13 +94,13 @@ install:
 # ======================================================================================================================
 
 system_prep_python:
-	apt -y install python3.6
+	apt -y install python3.6 python3-distutils python3-dev python3-setuptools
 
 system_prep_pip:
-	apt -y install python3.6 python3-distutils python3-setuptools wget curl
+	apt -y install wget curl
 	wget https://bootstrap.pypa.io/get-pip.py
 	python3.6 get-pip.py
 	rm get-pip.py
 
 system_prep_gcc:
-	apt -y install gcc
+	apt -y install gcc build_essential
