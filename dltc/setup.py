@@ -26,7 +26,7 @@ setup(
         'keras~=2.2.5',
         'h5py~=2.9',
         'six~=1.15.0',
-        'tensorflow~=2.2',
+        'tensorflow~=1.6',
         'cython'
     ],
     entry_points='''
