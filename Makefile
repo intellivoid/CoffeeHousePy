@@ -103,4 +103,4 @@ system_prep_pip:
 	rm get-pip.py
 
 system_prep_gcc:
-	apt -y install gcc build_essential
+	apt -y install gcc build-essential
