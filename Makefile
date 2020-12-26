@@ -68,9 +68,6 @@ build:
 
 # ======================================================================================================================
 
-install_requirements:
-	python3 -m pip install -Ur requirements.txt
-
 install_apt:
 	cd mods/apt; python3 setup.py install
 
@@ -101,7 +98,6 @@ install_rf:
 	cd resource_fetch; python3 setup.py install
 
 install:
-	make install_requirements
 	make install_rf
 	make install_nlpfr
 	make install_his
