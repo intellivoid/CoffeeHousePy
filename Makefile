@@ -28,29 +28,29 @@ clean:
 # ======================================================================================================================
 
 build_apt:
-	cd mods/apt; python3.8 setup.py build; python3.8 setup.py sdist
+	cd mods/apt; python3 setup.py build; python3 setup.py sdist
 
 build_stopwords:
-	cd mods/stopwords; python3.8 setup.py build; python3.8 setup.py sdist
+	cd mods/stopwords; python3 setup.py build; python3 setup.py sdist
 
 build_tokenizer:
-	cd mods/tokenizer; python3.8 setup.py build; python3.8 setup.py sdist
+	cd mods/tokenizer; python3 setup.py build; python3 setup.py sdist
 
 build_mods:
 	make build_apt build_stopwords build_tokenizer
 
 build_nlpfr:
 	make build_mods
-	cd nlpfr; python3.8 setup.py build; python3.8 setup.py sdist
+	cd nlpfr; python3 setup.py build; python3 setup.py sdist
 
 build_dltc:
-	cd dltc; python3.8 setup.py build; python3.8 setup.py sdist
+	cd dltc; python3 setup.py build; python3 setup.py sdist
 
 build_alg:
-	cd alg; python3.8 setup.py build; python3.8 setup.py sdist
+	cd alg; python3 setup.py build; python3 setup.py sdist
 
 build_his:
-	cd hyper_internal_service; python3.8 setup.py build; python3.8 setup.py sdist
+	cd hyper_internal_service; python3 setup.py build; python3 setup.py sdist
 
 build:
 	make build_nlpfr
@@ -61,29 +61,29 @@ build:
 # ======================================================================================================================
 
 install_apt:
-	cd mods/apt; python3.8 setup.py install
+	cd mods/apt; python3 setup.py install
 
 install_stopwords:
-	cd mods/stopwords; python3.8 setup.py install
+	cd mods/stopwords; python3 setup.py install
 
 install_tokenizer:
-	cd mods/tokenizer; python3.8 setup.py install
+	cd mods/tokenizer; python3 setup.py install
 
 install_mods:
 	make install_apt install_stopwords install_tokenizer
 
 install_nlpfr:
 	make install_mods
-	cd nlpfr; python3.8 setup.py install
+	cd nlpfr; python3 setup.py install
 
 install_dltc:
-	cd dltc; python3.8 setup.py install
+	cd dltc; python3 setup.py install
 
 install_alg:
-	cd alg; python3.8 setup.py install
+	cd alg; python3 setup.py install
 
 install_his:
-	cd hyper_internal_service; python3.8 -m pip install -Ur dev_requirements.txt; python3.8 setup.py install
+	cd hyper_internal_service; python3 -m pip install -Ur dev_requirements.txt; python3 setup.py install
 
 install:
 	make install_nlpfr
@@ -94,12 +94,12 @@ install:
 # ======================================================================================================================
 
 system_prep_python:
-	apt install python3.8
+	apt install python3
 
 system_prep_pip:
-	apt -y install python3.8 python3-distutils wget curl
+	apt -y install python3 python3-distutils wget curl
 	wget https://bootstrap.pypa.io/get-pip.py
-	python3.8 get-pip.py
+	python3 get-pip.py
 	rm get-pip.py
 
 system_prep_gcc:
