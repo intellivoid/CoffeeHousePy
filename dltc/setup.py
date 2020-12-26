@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'nltk',
-        'numpy~=1.17',
+        'numpy~=1.19.2',
         'scipy~=1.3.1',
         'gensim~=3.8.0',
         'scikit-learn==0.22.0',
