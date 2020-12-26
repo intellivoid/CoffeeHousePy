@@ -16,6 +16,6 @@ setup(
     author='Intellivoid Technologies',
     author_email='netkas@intellivoid.net',
     install_requires=[
-        'githubpy'
+        'pygithub'
     ]
 )
