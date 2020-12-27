@@ -1,6 +1,7 @@
 import os
 import sys
 import tarfile
+import requests as pyrequests
 import zipfile
 from pathlib import Path
 from packaging import version
@@ -89,14 +90,15 @@ class ResourceFetch(object):
                 return resource_path
 
             version_file = os.path.join(resource_path, ".version")
-            with open(version_file, 'r') as file:
-                current_version = file.read()
+            if os.path.exists(version_file):
+                with open(version_file, 'r') as file:
+                    current_version = file.read()
 
-            # Check if it's outdated
-            latest_version = self.get_latest_version(organization, repository)
-            if version.parse(current_version) < version.parse(latest_version):
-                self.install_resource(organization, repository, resource_path)
-            return resource_path
+                # Check if it's outdated
+                latest_version = self.get_latest_version(organization, repository)
+                if version.parse(current_version) < version.parse(latest_version):
+                    self.install_resource(organization, repository, resource_path)
+                return resource_path
         self.install_resource(organization, repository, resource_path)
         return resource_path
 
@@ -111,9 +113,9 @@ class ResourceFetch(object):
         releases = self.get_github().get_user(organization).get_repo(repository).get_releases()
         return releases[0].title
 
-    def get_latest_download_url(self, organization, repository):
+    def get_latest_asset_id(self, organization, repository):
         """
-        Gets the latest download URL for the requested resource
+        Gets the latest asset ID for the requested resource
 
         :param organization:
         :param repository:
@@ -121,7 +123,7 @@ class ResourceFetch(object):
         """
 
         releases = self.get_github().get_user(organization).get_repo(repository).get_releases()
-        return releases[0].get_assets()[0].browser_download_url
+        return releases[0].get_assets()[0].id
 
     @staticmethod
     def reporthook(blocknum, blocksize, totalsize):
@@ -136,6 +138,18 @@ class ResourceFetch(object):
         else:  # total size is unknown
             sys.stderr.write("read %d\n" % (readsofar,))
 
+    def obtain_download_url(self, organization, repository, asset_id):
+        request_uri = "https://api.github.com/repos/{0}/{1}/releases/assets/{2}".format(
+            organization, repository, asset_id)
+
+        response = pyrequests.get(request_uri,
+                                   allow_redirects=False,
+                                   headers={
+                                       'Accept': 'application/octet-stream',
+                                       'Authorization': 'token {0}'.format(self.get_pat())
+                                   })
+        return response.headers["location"]
+
     def install_resource(self, organization, repository, path):
         print("Installing {0} from {1}".format(repository, organization))
         temporary_directory = os.path.join(self.working_directory, "tmp")
@@ -143,11 +157,11 @@ class ResourceFetch(object):
             os.makedirs(temporary_directory)
 
         # Prepare the download
-        download_url = self.get_latest_download_url(organization, repository)
+        asset_id = self.get_latest_asset_id(organization, repository)
+        download_url = self.obtain_download_url(organization, repository, asset_id)
         parsed_url = urlparse(download_url)
         file_name = os.path.basename(parsed_url.path)
         file_path = os.path.join(temporary_directory, file_name)
-        file_extension = os.path.splitext(file_name)[1]
 
         if os.path.exists(file_path):
             self.rm(file_path)
@@ -156,6 +170,7 @@ class ResourceFetch(object):
             self.rm(path)
 
         os.makedirs(path)
+        print("Downloading from '{0}'".format(download_url))
         urlretrieve(download_url, file_path, self.reporthook)
 
         print("Extracting archive")
@@ -166,7 +181,7 @@ class ResourceFetch(object):
         elif file_name.endswith('.tar.bz2') or file_name.endswith('.tbz'):
             opener, mode = tarfile.open, 'r:bz2'
         else:
-            raise ValueError("Could not extract `%s` as no appropriate extractor is found" % path)
+            opener, mode = zipfile.ZipFile, 'r'
 
         cwd = os.getcwd()
         os.chdir(path)
@@ -183,4 +198,5 @@ class ResourceFetch(object):
         with open(os.path.join(path, ".version"), 'w+') as out:
             out.write(self.get_latest_version(organization, repository))
 
+        print("Updated successfully")
         return True
