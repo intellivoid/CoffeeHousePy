@@ -129,3 +129,8 @@ system_prep_pip:
 
 system_prep_gcc:
 	apt -y install gcc build-essential
+
+# ======================================================================================================================
+
+start_langdetect:
+	python3 -m coffeehouse_languagedetection --start-server

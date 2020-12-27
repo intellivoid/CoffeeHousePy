@@ -7,7 +7,7 @@ used in order to install CoffeeHousePy, and it's components onto the machine.
 
 ## Prepare the system
 
-The system must have `python3.8` installed, `pip` and `gcc`. To prepare the system run
+The system must have `python3.6` installed, `pip` and `gcc`. To prepare the system run
 the following command
 
 ```shell
@@ -22,4 +22,13 @@ CoffeeHousePy run the following command
 
 ```shell
 sudo -H make clean build install
+```
+
+
+## Services
+
+Once CoffeeHousePy is installed, you can start it's services indvidually.
+
+```shell
+make start_langdetect # Starts the language detection server, runs on port 5606
 ```
