@@ -8,7 +8,7 @@ used in order to install CoffeeHousePy, and it's components onto the machine.
 ## Prepare the system
 
 The system must have `python3.6` installed, `pip` and `gcc`. To prepare the system run
-the following command
+the following command, this is designed to run on Ubuntu 18.04
 
 ```shell
 sudo make system_prep_python system_prep_pip system_prep_gcc
