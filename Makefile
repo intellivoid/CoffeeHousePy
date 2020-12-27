@@ -22,12 +22,16 @@ clean_rf:
 clean_his:
 	rm -rf hyper_internal_service/build hyper_internal_service/dist hyper_internal_service/hyper_internal_service.egg-info
 
+clean_langdetect:
+	rm -rf services/language_detection/build services/language_detection/dist services/language_detection/coffeehouse_languagedetection.egg-info
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
 	make clean_his
 	make clean_alg
 	make clean_rf
+	make clean_langdetect
 
 # ======================================================================================================================
 
@@ -59,12 +63,16 @@ build_his:
 build_rf:
 	cd resource_fetch; python3 setup.py build; python3 setup.py sdist
 
+build_langdetect:
+	cd services/language_detection; python3 setup.py build; python3 setup.py sdist
+
 build:
 	make build_nlpfr
 	make build_his
 	make build_dltc
 	make build_alg
 	make build_rf
+	make build_langdetect
 
 # ======================================================================================================================
 
@@ -94,8 +102,11 @@ install_his:
 	cd hyper_internal_service; python3 -m pip install -Ur dev_requirements.txt; python3 setup.py install
 
 install_rf:
-	# Make sure to run 'python3 -m resource_fetch "<PERSONAL ACCESS TOKEN>"' before using resource_fetch!
 	cd resource_fetch; python3 setup.py install
+	python3 -m resource_fetch
+
+install_langdetect:
+	cd services/language_detection; python3 setup.py install
 
 install:
 	make install_rf
@@ -103,6 +114,7 @@ install:
 	make install_his
 	make install_dltc
 	make install_alg
+	make install_langdetect
 
 # ======================================================================================================================
 

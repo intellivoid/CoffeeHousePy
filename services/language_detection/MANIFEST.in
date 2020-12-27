@@ -1,0 +1,2 @@
+include requirements.txt
+include coffeehouse_languagedetection/ldutils/messages.properties
