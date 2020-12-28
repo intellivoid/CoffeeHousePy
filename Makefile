@@ -25,6 +25,9 @@ clean_his:
 clean_langdetect:
 	rm -rf services/language_detection/build services/language_detection/dist services/language_detection/coffeehouse_languagedetection.egg-info
 
+clean_spamdetect:
+	rm -rf services/spam_detection/build services/spam_detection/dist services/spam_detection/coffeehouse_spamdetection.egg-info
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
@@ -32,6 +35,7 @@ clean:
 	make clean_alg
 	make clean_rf
 	make clean_langdetect
+	make clean_spamdetect
 
 # ======================================================================================================================
 
@@ -66,6 +70,9 @@ build_rf:
 build_langdetect:
 	cd services/language_detection; python3 setup.py build; python3 setup.py sdist
 
+build_spamdetect:
+	cd services/spam_detection; python3 setup.py build; python3 setup.py sdist
+
 build:
 	make build_nlpfr
 	make build_his
@@ -73,6 +80,7 @@ build:
 	make build_alg
 	make build_rf
 	make build_langdetect
+	make build_spamdetect
 
 # ======================================================================================================================
 
@@ -108,6 +116,9 @@ install_rf:
 install_langdetect:
 	cd services/language_detection; python3 setup.py install
 
+install_spamdetect:
+	cd services/spam_detection; python3 setup.py install
+
 install:
 	make install_rf
 	make install_nlpfr
@@ -115,6 +126,7 @@ install:
 	make install_dltc
 	make install_alg
 	make install_langdetect
+	make install_spamdetect
 
 # ======================================================================================================================
 
@@ -134,3 +146,6 @@ system_prep_gcc:
 
 start_langdetect:
 	python3 -m coffeehouse_languagedetection --start-server
+
+start_spamdetect:
+	python3 -m coffeehouse_spamdetection --start-server
