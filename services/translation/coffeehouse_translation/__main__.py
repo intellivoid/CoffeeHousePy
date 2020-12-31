@@ -1,7 +1,6 @@
 import sys
 
-from coffeehouse_spamdetection import SpamDetection
-from coffeehouse_spamdetection import Server
+from coffeehouse_translation import Server
 
 
 def _real_main(argv=None):
@@ -13,8 +12,6 @@ def _real_main(argv=None):
     """
     if argv[1] == '--help':
         _help_menu(argv)
-    if argv[1] == '--test':
-        _test_model(argv)
     if argv[1] == '--start-server':
         _start_server(argv)
 
@@ -38,29 +35,11 @@ def _help_menu(argv=None):
     :return:
     """
     print(
-        "CoffeeHouse SpamDetection CLI\n\n"
+        "CoffeeHouse Translation CLI\n\n"
         "   --help\n"
-        "   --test\n"
         "   --start-server\n"
     )
     sys.exit()
-
-
-def _test_model(argv=None):
-    """
-    Tests the model's prediction by allowing user input and displaying the
-    prediction output
-
-    :param argv:
-    :return:
-    """
-    print("Loading")
-    spam_detection = SpamDetection()
-    print("Ready\n")
-
-    while True:
-        input_text = input("> ")
-        print(spam_detection.predict(input_text))
 
 
 if __name__ == '__main__':

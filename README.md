@@ -31,4 +31,14 @@ Once CoffeeHousePy is installed, you can start it's services indvidually.
 
 ```shell
 make start_langdetect # Starts the language detection server, runs on port 5606
+make start_spamdetect # Starts the spam detection server, runs on port 5601
+make start_translate # Starts the translation server, runs on port 5603
 ```
+
+### Services Ports
+
+| Name                           | Protocol | Port |
+|--------------------------------|----------|------|
+| CoffeeHouse Language Detection | HTTP     | 5606 |
+| CoffeeHouse Spam Detection     | HTTP     | 5601 |
+| CoffeeHouse Translate          | HTTP     | 5603 |

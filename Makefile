@@ -28,12 +28,16 @@ clean_langdetect:
 clean_spamdetect:
 	rm -rf services/spam_detection/build services/spam_detection/dist services/spam_detection/coffeehouse_spamdetection.egg-info
 
+clean_translation:
+	rm -rf services/translation/build services/translation/dist services/translation/coffeehouse_translation.egg-info
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
 	make clean_his
 	make clean_alg
 	make clean_rf
+	make clean_translation
 	make clean_langdetect
 	make clean_spamdetect
 
@@ -73,12 +77,16 @@ build_langdetect:
 build_spamdetect:
 	cd services/spam_detection; python3 setup.py build; python3 setup.py sdist
 
+build_translation:
+	cd services/translation; python3 setup.py build; python3 setup.py sdist
+
 build:
 	make build_nlpfr
 	make build_his
 	make build_dltc
 	make build_alg
 	make build_rf
+	make buid_translation
 	make build_langdetect
 	make build_spamdetect
 
@@ -119,12 +127,16 @@ install_langdetect:
 install_spamdetect:
 	cd services/spam_detection; python3 setup.py install
 
+install_translation:
+	cd services/translation; python3 setup.py install
+
 install:
 	make install_rf
 	make install_nlpfr
 	make install_his
 	make install_dltc
 	make install_alg
+	make install_translation
 	make install_langdetect
 	make install_spamdetect
 
@@ -149,3 +161,6 @@ start_langdetect:
 
 start_spamdetect:
 	python3 -m coffeehouse_spamdetection --start-server
+
+start_translation:
+	python3 -m coffeehouse_translation --start-server
