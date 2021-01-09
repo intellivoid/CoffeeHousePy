@@ -1,0 +1,16 @@
+FROM ubuntu:18.04
+EXPOSE 5606 5601 5603
+MAINTAINER Diederik Noordhuis (diederikn@intellivoid.net)
+
+ARG DEBIAN_FRONTEND=noninteractive
+COPY Docker/bootstrap /usr/local/bin/bootstrap
+COPY Docker/update_server /usr/local/bin/update_server
+
+RUN \
+    apt-get update && \
+    ln -fs /usr/share/zoneinfo/UTC /etc/localtime && \
+    apt-get update && \
+    apt-get install git make sudo nano vim wget curl unzip -y && \
+    apt-get clean
+
+CMD ["/bin/bash", "/usr/local/bin/bootstrap"]

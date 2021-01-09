@@ -1,0 +1,36 @@
+#!/bin/sh
+echo "### Initializing CoffeeHouse-Utils ###"
+chmod a+x /usr/local/bin/update_server
+if [ ! -f /firstrun.pass ]; then
+    echo "(!) First run! Installing resources..."
+    update_server
+    echo "(+) Setting boot flag..."
+    touch /firstrun.pass
+    echo "[...] Restarting server in detached mode..."
+else
+    cd /CoffeeHousePy
+    echo "### Starting CoffeeHouse-LangDetect ###"
+    make start_langdetect &
+    echo "### Starting CoffeeHouse-SpamDetect ###"
+    make start_spamdetect &
+
+    while sleep 60; do
+
+      # If grep find anything, they exit with 0 status
+      # If they are not 0, then something is wrong
+
+      ps aux | grep coffeehouse_languagedetection | grep -q -v grep
+      LANGDETECT_STATUS=$?
+      if [ $LANGDETECT_STATUS -ne 0 ]; then
+        echo "ERROR: coffeehouse_languagedetection has been terminated, terminating container."
+        exit 1
+      fi
+
+      ps aux | grep coffeehouse_spamdetection | grep -q -v grep
+      SPAMDETECT_STATUS=$?
+      if [ $SPAMDETECT_STATUS -ne 0 ]; then
+        echo "ERROR: coffeehouse_spamdetection has been terminated, terminating container."
+        exit 1
+      fi
+    done
+fi

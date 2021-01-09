@@ -164,3 +164,14 @@ start_spamdetect:
 
 start_translation:
 	python3 -m coffeehouse_translation --start-server
+
+# ======================================================================================================================
+
+docker_build:
+	docker build -t="coffeehouse_utils" -f Dockerfile .
+
+docker_run:
+	docker run -it --name coffeehouse_utils -h coffeehouse_utils --restart always -p 5601:5601 -p 5606:5606 -p 5603:5603 coffeehouse_utils
+
+docker_rm:
+	docker rm -f coffeehouse_utils
