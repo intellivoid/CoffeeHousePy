@@ -169,6 +169,9 @@ start_spamdetect:
 start_translation:
 	python3 -m coffeehouse_translation --start-server
 
+start_corenlp:
+	cd services/cornlp; make start
+
 # ======================================================================================================================
 
 docker_build:
