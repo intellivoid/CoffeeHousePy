@@ -80,6 +80,9 @@ build_spamdetect:
 build_translation:
 	cd services/translation; python3 setup.py build; python3 setup.py sdist
 
+build_corenlp:
+	cd services/corenlp; make build
+
 build:
 	make build_nlpfr
 	make build_his
@@ -89,6 +92,7 @@ build:
 	make buid_translation
 	make build_langdetect
 	make build_spamdetect
+	make build
 
 # ======================================================================================================================
 

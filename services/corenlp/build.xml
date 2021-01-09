@@ -392,7 +392,7 @@
   </target>
 
   <target name="jar" depends="compile">
-    <jar destfile="javanlp-core.jar">
+    <jar destfile="coffeehouse_corenlp.jar">
       <fileset dir="${project.core}/classes" />
     </jar>
   </target>
@@ -408,7 +408,7 @@
   <macrodef name="buildjsp">
     <attribute name="webapp.path"/>   <!-- where to find the .jsp files -->
     <attribute name="webapp.war"/>    <!-- name of the .war to produce -->
-    <attribute name="webapp.jar"/>    <!-- probably javanlp-core.jar -->
+    <attribute name="webapp.jar"/>    <!-- probably coffeehouse_corenlp.jar -->
     <element name="webapp.lib"/>      <!-- libs to include -->
     <element name="webapp.data"/>     <!-- data files to include -->
 
@@ -465,7 +465,7 @@
     <war destfile="sutime.war"
          webxml="${source.path}/edu/stanford/nlp/time/suservlet/WEB-INF/web.xml">
       <lib dir=".">
-        <include name="javanlp-core.jar"/>
+        <include name="coffeehouse_corenlp.jar"/>
       </lib>
       <lib dir="${basedir}/lib">
         <include name="commons-lang3-3.1.jar"/>
@@ -494,7 +494,7 @@
     <war destfile="openie.war"
          webxml="${source.path}/edu/stanford/nlp/naturalli/demo/web.xml">
       <lib dir=".">
-        <include name="javanlp-core.jar"/>
+        <include name="coffeehouse_corenlp.jar"/>
       </lib>
       <zipfileset prefix="WEB-INF/data"
                   file="/u/nlp/data/pos-tagger/distrib/english-left3words-distsim.tagger"/>
@@ -535,7 +535,7 @@
           description="build the parser webapp">
     <buildjsp webapp.path="edu/stanford/nlp/parser/webapp"
               webapp.war="parser.war"
-              webapp.jar="javanlp-core.jar">
+              webapp.jar="coffeehouse_corenlp.jar">
       <webapp.lib>
         <lib dir="/u/nlp/data/StanfordCoreNLPModels">
           <include name="stanford-spanish-corenlp-models-current.jar"/>
@@ -565,11 +565,11 @@
           description="build the ner webapp">
     <!-- This is built from a java servlet, not a jsp. -->
     <!-- The class needed for the results page will already be in
-         javanlp-core.jar -->
+         coffeehouse_corenlp.jar -->
     <war destfile="ner.war"
          webxml="${source.path}/edu/stanford/nlp/ie/ner/webapp/WEB-INF/web.xml">
       <lib dir=".">
-        <include name="javanlp-core.jar"/>
+        <include name="coffeehouse_corenlp.jar"/>
       </lib>
       <lib dir="${basedir}/lib">
         <include name="commons-lang3-3.1.jar"/>
@@ -595,11 +595,11 @@
           description="build the corenlp webapp">
     <!-- This is built from a java servlet, not a jsp. -->
     <!-- The class needed for the results page will already be in
-         javanlp-core.jar -->
+         coffeehouse_corenlp.jar -->
     <war destfile="corenlp.war"
          webxml="${source.path}/edu/stanford/nlp/pipeline/webapp/WEB-INF/web.xml">
       <lib dir=".">
-        <include name="javanlp-core.jar"/>
+        <include name="coffeehouse_corenlp.jar"/>
       </lib>
       <lib dir="${basedir}/lib">
         <include name="commons-lang3-3.1.jar"/>
@@ -647,7 +647,7 @@
                identifier="edu.stanford.nlp.trees.tregex.gui.TregexGUI"
                mainclassname="edu.stanford.nlp.trees.tregex.gui.TregexGUI">
       <runtime dir="${env.JAVA_HOME}" />
-      <classpath file="javanlp-core.jar" />
+      <classpath file="coffeehouse_corenlp.jar" />
     </bundleapp>
   </target>
 

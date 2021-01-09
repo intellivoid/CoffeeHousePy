@@ -42,3 +42,4 @@ make start_translate # Starts the translation server, runs on port 5603
 | CoffeeHouse Language Detection | HTTP     | 5606 |
 | CoffeeHouse Spam Detection     | HTTP     | 5601 |
 | CoffeeHouse Translate          | HTTP     | 5603 |
+| CoffeeHouse CoreNLP            | HTTP     | 5604 |
