@@ -31,6 +31,9 @@ clean_spamdetect:
 clean_translation:
 	rm -rf services/translation/build services/translation/dist services/translation/coffeehouse_translation.egg-info
 
+clean_corenlp:
+	cd services/corenlp; make clean
+
 clean:
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
@@ -40,6 +43,7 @@ clean:
 	make clean_translation
 	make clean_langdetect
 	make clean_spamdetect
+	make clean_corenlp
 
 # ======================================================================================================================
 
@@ -92,7 +96,7 @@ build:
 	make buid_translation
 	make build_langdetect
 	make build_spamdetect
-	make build
+	make build_corenlp
 
 # ======================================================================================================================
 
