@@ -147,6 +147,7 @@ install:
 	make install_translation
 	make install_langdetect
 	make install_spamdetect
+	make build_corenlp
 
 # ======================================================================================================================
 
