@@ -158,6 +158,9 @@ system_prep_pip:
 system_prep_gcc:
 	apt -y install gcc build-essential
 
+system_prep_java:
+	apt -y install openjdk-8-jre openjdk-8-jdk ant
+
 # ======================================================================================================================
 
 start_langdetect:
