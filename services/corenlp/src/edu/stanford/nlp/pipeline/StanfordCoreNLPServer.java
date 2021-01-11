@@ -277,17 +277,6 @@ public class StanfordCoreNLPServer implements Runnable {
   // TODO(AngledLuffa): this must be a constant somewhere, but I couldn't find it
   static final String URL_ENCODED = "application/x-www-form-urlencoded";
 
-  public static String replacer(String data) {
-    try {
-      data = data.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
-      data = data.replaceAll("\\+", "%2B");
-      data = URLDecoder.decode(data, "utf-8");
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return data;
-  }
-
   /**
    * Reads the POST contents of the request and parses it into an Annotation object, ready to be annotated.
    * This method can also read a serialized document, if the input format is set to be serialized.
@@ -338,7 +327,14 @@ public class StanfordCoreNLPServer implements Runnable {
 
         String text = IOUtils.slurpReader(IOUtils.encodedInputStreamReader(httpExchange.getRequestBody(), encoding));
         if (contentType.equals(URL_ENCODED)) {
-          text = URLDecoder.decode(replacer(text), encoding);
+          try {
+            text = text.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
+            text = text.replaceAll("\\+", "%2B");
+            text = URLDecoder.decode(text, "utf-8");
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          text = URLDecoder.decode(text, encoding);
         }
         // We use to trim. But now we don't. It seems like doing that is illegitimate. text = text.trim();
 
