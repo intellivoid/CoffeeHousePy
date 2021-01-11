@@ -278,27 +278,11 @@ public class StanfordCoreNLPServer implements Runnable {
   static final String URL_ENCODED = "application/x-www-form-urlencoded";
 
   public static String replacer(String data) {
-
     try {
-      StringBuffer tempBuffer = new StringBuffer();
-      int incrementor = 0;
-      int dataLength = data.length();
-      while (incrementor < dataLength) {
-        char characterAt = data.charAt(incrementor);
-        if (characterAt == '%') {
-          tempBuffer.append("<percentage>");
-        } else if (characterAt == '+') {
-          tempBuffer.append("<plus>");
-        } else {
-          tempBuffer.append(characterAt);
-        }
-        incrementor++;
-      }
-      data = tempBuffer.toString();
-      data = URLDecoder.decode(replacer(data), "utf-8");
-      data = data.replaceAll("<percentage>", "%");
-      data = data.replaceAll("<plus>", "+");
-    } catch(Exception e) {
+      data = data.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
+      data = data.replaceAll("\\+", "%2B");
+      data = URLDecoder.decode(data, "utf-8");
+    } catch (Exception e) {
       e.printStackTrace();
     }
     return data;
