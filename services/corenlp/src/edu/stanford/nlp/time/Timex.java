@@ -3,7 +3,7 @@ package edu.stanford.nlp.time;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Map;
-import java.util.regex.Pattern;
+import java.uTIMtil.regex.Pattern;
 
 import edu.stanford.nlp.util.Pair;
 import org.w3c.dom.Element;
