@@ -259,7 +259,7 @@ public class StanfordCoreNLPServer implements Runnable {
         Map<String, String> params = new HashMap<>();
         for (String param : query.split("&")) {
           String[] keyValue = param.split("=", 2);
-          String key = URLDecoder.decode(keyValue[0], "UTF-8");
+          String key = URLDecoder.decode(replacer(keyValue[0]), "UTF-8");
           String value = keyValue.length > 1 ? URLDecoder.decode(keyValue[1], "UTF-8") : "";
           if (!key.isEmpty()) {
             params.put(key, value);
@@ -276,6 +276,33 @@ public class StanfordCoreNLPServer implements Runnable {
 
   // TODO(AngledLuffa): this must be a constant somewhere, but I couldn't find it
   static final String URL_ENCODED = "application/x-www-form-urlencoded";
+
+  public static String replacer(String data) {
+
+    try {
+      StringBuffer tempBuffer = new StringBuffer();
+      int incrementor = 0;
+      int dataLength = data.length();
+      while (incrementor < dataLength) {
+        char characterAt = data.charAt(incrementor);
+        if (characterAt == '%') {
+          tempBuffer.append("<percentage>");
+        } else if (characterAt == '+') {
+          tempBuffer.append("<plus>");
+        } else {
+          tempBuffer.append(characterAt);
+        }
+        incrementor++;
+      }
+      data = tempBuffer.toString();
+      data = URLDecoder.decode(replacer(data), "utf-8");
+      data = data.replaceAll("<percentage>", "%");
+      data = data.replaceAll("<plus>", "+");
+    } catch(Exception e) {
+      e.printStackTrace();
+    }
+    return data;
+  }
 
   /**
    * Reads the POST contents of the request and parses it into an Annotation object, ready to be annotated.
@@ -327,14 +354,7 @@ public class StanfordCoreNLPServer implements Runnable {
 
         String text = IOUtils.slurpReader(IOUtils.encodedInputStreamReader(httpExchange.getRequestBody(), encoding));
         if (contentType.equals(URL_ENCODED)) {
-          try {
-            text = text.replaceAll("%(?![0-9a-fA-F]{2})", "%25");
-            text = text.replaceAll("\\+", "%2B");
-            text = URLDecoder.decode(text, "utf-8");
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-          text = URLDecoder.decode(text, encoding);
+          text = URLDecoder.decode(replacer(text), encoding);
         }
         // We use to trim. But now we don't. It seems like doing that is illegitimate. text = text.trim();
 
