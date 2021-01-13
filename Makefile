@@ -4,6 +4,9 @@ clean_apt:
 clean_scikit_image:
 	rm -rf deps/scikit-image/build deps/scikit-image/dist deps/scikit-image/scikit-image.egg-info
 
+clean_numpy:
+	rm -rf deps/numpy/build deps/numpy/dist deps/numpy/numpy.egg-info
+
 clean_stopwords:
 	rm -rf mods/stopwords/build mods/stopwords/dist mods/stopwords/coffeehousemod_stopwords.egg-info
 
@@ -39,6 +42,7 @@ clean_corenlp:
 
 clean:
 	make clean_scikit_image
+	make clean_numpy
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
 	make clean_his
@@ -53,6 +57,9 @@ clean:
 
 build_scikit_image:
 	cd deps/scikit-image; python3 setup.py build; python3 setup.py sdist
+
+build_numpy:
+	cd deps/numpy; python3 setup.py build; python3 setup.py sdist
 
 build_apt:
 	cd mods/apt; python3 setup.py build; python3 setup.py sdist
@@ -99,6 +106,7 @@ build:
 	make build_his
 	make build_dltc
 	make build_alg
+	make build_numpy
 	make build_scikit_image
 	make build_rf
 	make buid_translation
@@ -110,6 +118,9 @@ build:
 
 install_scikit_image:
 	cd deps/scikit-image; python3 setup.py install
+
+install_numpy:
+	cd deps/numpy; python3 setup.py install
 
 install_apt:
 	cd mods/apt; python3 setup.py install
@@ -151,6 +162,7 @@ install_translation:
 
 install:
 	make install_rf
+	make install_numpy
 	make install_scikit_image
 	make install_nlpfr
 	make install_his
