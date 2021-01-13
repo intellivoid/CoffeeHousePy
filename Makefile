@@ -1,6 +1,9 @@
 clean_apt:
 	rm -rf mods/apt/build mods/apt/dist mods/apt/coffeehousemod_apt.egg-info
 
+clean_scikit_image:
+	rm -rf deps/scikit-image/build deps/scikit-image/dist deps/scikit-image/scikit-image.egg-info
+
 clean_stopwords:
 	rm -rf mods/stopwords/build mods/stopwords/dist mods/stopwords/coffeehousemod_stopwords.egg-info
 
@@ -35,6 +38,7 @@ clean_corenlp:
 	cd services/corenlp; make clean
 
 clean:
+	make clean_scikit_image
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
 	make clean_his
@@ -46,6 +50,9 @@ clean:
 	make clean_corenlp
 
 # ======================================================================================================================
+
+build_scikit_image:
+	cd deps/scikit-image; python3 setup.py build; python3 setup.py sdist
 
 build_apt:
 	cd mods/apt; python3 setup.py build; python3 setup.py sdist
@@ -92,6 +99,7 @@ build:
 	make build_his
 	make build_dltc
 	make build_alg
+	make build_scikit_image
 	make build_rf
 	make buid_translation
 	make build_langdetect
@@ -99,6 +107,9 @@ build:
 	make build_corenlp
 
 # ======================================================================================================================
+
+install_scikit_image:
+	cd deps/scikit-image; python3 setup.py install
 
 install_apt:
 	cd mods/apt; python3 setup.py install
@@ -140,6 +151,7 @@ install_translation:
 
 install:
 	make install_rf
+	make install_scikit_image
 	make install_nlpfr
 	make install_his
 	make install_dltc
