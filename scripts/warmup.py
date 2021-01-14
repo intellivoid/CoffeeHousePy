@@ -9,6 +9,7 @@ import requests
 import base64
 import time
 import sys
+import os
 
 
 def core_nlp():
@@ -106,9 +107,6 @@ def nsfw():
 
     current_tries = 0
     max_tries = 30  # 5 Minutes
-
-    import os
-    print()
 
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)), "red.jpg"), "rb") as img_file:
         image_data = base64.b64encode(img_file.read()).decode('utf-8')
