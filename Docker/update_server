@@ -10,7 +10,7 @@ read -p 'Enter your 25-50 character PAT: ' GIT_API_KEY
 echo " #### Cloning CoffeeHousePy"
 git clone https://${GIT_API_KEY}@github.com/Intellivoid/CoffeeHousePy.git
 cd /CoffeeHousePy
-git checkout corenlp
+git checkout nsfw_detection
 
 echo " #### Preparing System for Python"
 make system_prep_python
