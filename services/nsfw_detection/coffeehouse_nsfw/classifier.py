@@ -7,6 +7,7 @@ import numpy as np
 from .video_utils import get_interest_frames_from_video
 from .image_utils import load_images
 from PIL import Image as pil_image
+from resource_fetch import ResourceFetch
 
 import tensorflow as tf
 
@@ -23,22 +24,8 @@ class Classifier:
         """
             model = Classifier()
         """
-        url = "https://github.com/notAI-tech/NudeNet/releases/download/v0/classifier_model_tf.tar"
-        home = os.path.expanduser("~")
-        model_folder = os.path.join(home, ".NudeNet/")
-        if not os.path.exists(model_folder):
-            os.mkdir(model_folder)
-
-        model_tar_file_name = os.path.basename(url)
-        model_tar_file_path = os.path.join(model_folder, model_tar_file_name)
-        model_path = model_tar_file_path.replace(".tar", "")
-
-        if not os.path.exists(model_path):
-            print("Downloading the checkpoint to", model_path)
-            pydload.dload(url, save_to_path=model_tar_file_path, max_time=None)
-            with tarfile.open(model_tar_file_path) as f:
-                f.extractall(path=os.path.dirname(model_tar_file_path))
-            os.remove(model_tar_file_path)
+        self.rf = ResourceFetch()
+        model_path = os.path.join(self.rf.fetch("Intellivoid", "CoffeeHouseData-Porn"), "classifier_model_tf")
 
         self.nsfw_model = tf.contrib.predictor.from_saved_model(
             model_path, signature_def_key="predict"

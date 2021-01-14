@@ -10,13 +10,14 @@ import sys
 from shutil import rmtree
 
 from setuptools import find_packages, setup, Command
+from setuptools.command.install import install
 
 # Package meta-data.
-NAME = 'NudeNet'
+NAME = 'CoffeeHouse NSFW'
 DESCRIPTION = 'An ensemble of Neural Nets for Nudity Detection and Censoring'
-URL = 'https://github.com/bedapudi6788/NudeNet'
-EMAIL = 'praneethbedapudi@gmail.com'
-AUTHOR = 'BEDAPUDI PRANEETH'
+URL = 'https://github.com/Intellivoid/CoffeeHousePy'
+EMAIL = 'zixing.narrakas1996@gmail.com'
+AUTHOR = 'Zi Xing narrakas'
 REQUIRES_PYTHON = '>=3.6.0'
 VERSION = '2.0.6'
 
@@ -57,41 +58,16 @@ else:
     about['__version__'] = VERSION
 
 
-class UploadCommand(Command):
-    """Support setup.py upload."""
-
-    description = 'Build and publish the package.'
-    user_options = []
-
-    @staticmethod
-    def status(s):
-        """Prints things in bold."""
-        print('\033[1m{0}\033[0m'.format(s))
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
+class PostInstallCommand(install):
+    """Post-installation for installation mode."""
 
     def run(self):
-        try:
-            self.status('Removing previous builds…')
-            rmtree(os.path.join(here, 'dist'))
-        except OSError:
-            pass
+        install.run(self)
+        from resource_fetch import ResourceFetch
+        rf = ResourceFetch()
 
-        self.status('Building Source and Wheel (universal) distribution…')
-        os.system('{0} setup.py sdist bdist_wheel --universal'.format(sys.executable))
-
-        self.status('Uploading the package to PyPI via Twine…')
-        os.system('twine upload dist/*')
-
-        self.status('Pushing git tags…')
-        os.system('git tag v{0}'.format(about['__version__']))
-        os.system('git push --tags')
-        
-        sys.exit()
+        # Update the model
+        rf.fetch("Intellivoid", "CoffeeHouseData-Porn")
 
 
 # Where the magic happens:
@@ -117,8 +93,6 @@ setup(
     include_package_data=True,
     license='GPLv3',
     classifiers=[
-        # Trove classifiers
-        # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
@@ -126,8 +100,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
-    # $ setup.py publish support.
     cmdclass={
-        'upload': UploadCommand,
+        'install': PostInstallCommand,
     },
 )

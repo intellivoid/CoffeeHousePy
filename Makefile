@@ -1,12 +1,6 @@
 clean_apt:
 	rm -rf mods/apt/build mods/apt/dist mods/apt/coffeehousemod_apt.egg-info
 
-clean_scikit_image:
-	rm -rf deps/scikit-image/build deps/scikit-image/dist deps/scikit-image/scikit-image.egg-info
-
-clean_numpy:
-	rm -rf deps/numpy/build deps/numpy/dist deps/numpy/numpy.egg-info
-
 clean_stopwords:
 	rm -rf mods/stopwords/build mods/stopwords/dist mods/stopwords/coffeehousemod_stopwords.egg-info
 
@@ -40,9 +34,10 @@ clean_translation:
 clean_corenlp:
 	cd services/corenlp; make clean
 
+clean_nsfw:
+	rm -rf services/nsfw_detection/build services/nsfw_detection/dist services/nsfw_detection/coffeehouse_nsfw.egg-info
+
 clean:
-	make clean_scikit_image
-	make clean_numpy
 	make clean_apt clean_stopwords clean_tokenizer clean_nlpfr
 	make clean_dltc
 	make clean_his
@@ -51,15 +46,10 @@ clean:
 	make clean_translation
 	make clean_langdetect
 	make clean_spamdetect
+	make clean_nsfw
 	make clean_corenlp
 
 # ======================================================================================================================
-
-build_scikit_image:
-	cd deps/scikit-image; python3 setup.py build; python3 setup.py sdist
-
-build_numpy:
-	cd deps/numpy; python3 setup.py build; python3 setup.py sdist
 
 build_apt:
 	cd mods/apt; python3 setup.py build; python3 setup.py sdist
@@ -101,26 +91,22 @@ build_translation:
 build_corenlp:
 	cd services/corenlp; make build
 
+build_nsfw:
+	cd services/nsfw_detection; python3 setup.py build; python3 setup.py sdist
+
 build:
 	make build_nlpfr
 	make build_his
 	make build_dltc
 	make build_alg
-	make build_numpy
-	make build_scikit_image
 	make build_rf
 	make buid_translation
 	make build_langdetect
 	make build_spamdetect
+	make build_nsfw
 	make build_corenlp
 
 # ======================================================================================================================
-
-install_scikit_image:
-	cd deps/scikit-image; python3 setup.py install
-
-install_numpy:
-	cd deps/numpy; python3 setup.py install
 
 install_apt:
 	cd mods/apt; python3 setup.py install
@@ -160,10 +146,14 @@ install_spamdetect:
 install_translation:
 	cd services/translation; python3 setup.py install
 
-install:
+install_nsfw:
+	cd services/nsfw_detection; python3 setup.py install
+
+install_full:
 	make install_rf
-	make install_numpy
-	make install_scikit_image
+	make install
+
+install:
 	make install_nlpfr
 	make install_his
 	make install_dltc
@@ -171,6 +161,7 @@ install:
 	make install_translation
 	make install_langdetect
 	make install_spamdetect
+	make install_nsfw
 	make build_corenlp
 
 # ======================================================================================================================
@@ -186,6 +177,7 @@ system_prep_pip:
 
 system_prep_gcc:
 	apt -y install gcc build-essential
+	python3 -m pip install cython
 
 system_prep_java:
 	apt -y install openjdk-8-jre openjdk-8-jdk ant
