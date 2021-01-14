@@ -155,6 +155,9 @@ install_translation:
 	cd services/translation; python3 setup.py install
 
 install_nsfw:
+	python3 -m pip install opencv-python
+	python3 -m pip install scikit-image
+	python3 -m pip install pydload
 	cd services/nsfw_detection; python3 setup.py install
 
 install_ping:

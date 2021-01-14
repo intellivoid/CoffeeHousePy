@@ -14,6 +14,7 @@ class Server(object):
         self.web_application = web.Application()
         self.web_application.add_routes(
             [web.post('/', self.ping)]
+            [web.get('/', self.ping)]
         )
 
     async def ping(self, request):
