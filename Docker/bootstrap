@@ -25,7 +25,6 @@ else
       exit 1
     fi
 
-
     echo "### Starting Ping Service ###"
     make start_ping &
 
