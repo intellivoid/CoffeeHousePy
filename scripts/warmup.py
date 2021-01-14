@@ -119,7 +119,7 @@ def nsfw():
             sys.exit(1)
 
         try:
-            r = requests.post("http://0.0.0.0:5601/", data={
+            r = requests.post("http://0.0.0.0:5602/", data={
                 "input": image_data,
                 "type": "jpg"
             })
