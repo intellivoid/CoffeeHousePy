@@ -28,6 +28,9 @@ clean_langdetect:
 clean_spamdetect:
 	rm -rf services/spam_detection/build services/spam_detection/dist services/spam_detection/coffeehouse_spamdetection.egg-info
 
+clean_ping:
+	rm -rf services/ping_service/build services/ping_service/dist services/ping_service/coffeehouse_ping.egg-info
+
 clean_translation:
 	rm -rf services/translation/build services/translation/dist services/translation/coffeehouse_translation.egg-info
 
@@ -48,6 +51,7 @@ clean:
 	make clean_spamdetect
 	make clean_nsfw
 	make clean_corenlp
+	make clean_ping
 
 # ======================================================================================================================
 
@@ -94,6 +98,9 @@ build_corenlp:
 build_nsfw:
 	cd services/nsfw_detection; python3 setup.py build; python3 setup.py sdist
 
+build_ping:
+	cd services/ping_service; python3 setup.py build; python3 setup.py sdist
+
 build:
 	make build_nlpfr
 	make build_his
@@ -105,6 +112,7 @@ build:
 	make build_spamdetect
 	make build_nsfw
 	make build_corenlp
+	make build_ping
 
 # ======================================================================================================================
 
@@ -149,6 +157,9 @@ install_translation:
 install_nsfw:
 	cd services/nsfw_detection; python3 setup.py install
 
+install_ping:
+	cd services/ping_service; python3 setup.py install
+
 install_full:
 	make install_rf
 	make install
@@ -163,6 +174,7 @@ install:
 	make install_spamdetect
 	make install_nsfw
 	make build_corenlp
+	make build_ping
 
 # ======================================================================================================================
 
@@ -198,6 +210,12 @@ start_nsfw:
 
 start_corenlp:
 	cd services/corenlp; make start
+
+start_ping:
+	python3 -m coffeehouse_ping --start-server
+
+start_warmup:
+	cd scripts; python3 warmup.py
 
 # ======================================================================================================================
 

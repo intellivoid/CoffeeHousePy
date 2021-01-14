@@ -25,4 +25,4 @@ echo " #### Preparing System for Java"
 make system_prep_java
 
 echo " #### Building and Installing CoffeeHousePy"
-make install
+make install_full
