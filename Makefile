@@ -228,5 +228,8 @@ docker_build:
 docker_run:
 	docker run -it --name coffeehouse_utils -h coffeehouse_utils --restart always -p 5600:5600 -p 5601:5601 -p 5602:5602 -p 5603:5603 -p 5604:5604 -p 5606:5606 coffeehouse_utils
 
+docker_run_no_expose:
+	docker run -it --name coffeehouse_utils -h coffeehouse_utils --restart always coffeehouse_utils
+
 docker_rm:
 	docker rm -f coffeehouse_utils
