@@ -177,7 +177,7 @@ install:
 	make install_spamdetect
 	make install_nsfw
 	make build_corenlp
-	make build_ping
+	make install_ping
 
 # ======================================================================================================================
 
