@@ -4,7 +4,6 @@ MAINTAINER Diederik Noordhuis (diederikn@intellivoid.net)
 
 ARG DEBIAN_FRONTEND=noninteractive
 COPY Docker/bootstrap /usr/local/bin/bootstrap
-COPY Docker/update_server /usr/local/bin/update_server
 
 RUN \
     apt-get update && \
