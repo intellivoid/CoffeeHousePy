@@ -24,7 +24,7 @@ def core_nlp():
             sys.exit(1)
 
         try:
-            r = requests.post("http://0.0.0.0:5604/?properties={\"annotators\": \"tokenize,ssplit,pos,ner,regexner,"
+            r = requests.post("http://127.0.0.1:5604/?properties={\"annotators\": \"tokenize,ssplit,pos,ner,regexner,"
                               "sentiment\"}&pipelineLanguage=en",
 
                               headers={"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"},
@@ -57,7 +57,7 @@ def langdetect():
             sys.exit(1)
 
         try:
-            r = requests.post("http://0.0.0.0:5606/", data={"input": "The quick brown fox jumped over the lazy dog"})
+            r = requests.post("http://127.0.0.1:5606/", data={"input": "The quick brown fox jumped over the lazy dog"})
             if r.status_code == 200:
                 print("[LANGDETECT] OK")
                 break
@@ -85,7 +85,7 @@ def spamdetect():
             sys.exit(1)
 
         try:
-            r = requests.post("http://0.0.0.0:5601/", data={"input": "The quick brown fox jumped over the lazy dog"})
+            r = requests.post("http://127.0.0.1:5601/", data={"input": "The quick brown fox jumped over the lazy dog"})
             if r.status_code == 200:
                 print("[SPAMDETECT] OK")
                 break
@@ -117,7 +117,7 @@ def nsfw():
             sys.exit(1)
 
         try:
-            r = requests.post("http://0.0.0.0:5602/", data={
+            r = requests.post("http://127.0.0.1:5602/", data={
                 "input": image_data,
                 "type": "jpg"
             })
