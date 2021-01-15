@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-EXPOSE 5600 5601 5602 5603 5604 5606
+EXPOSE 5600 5601 5602 5603 5604 5605 5606
 MAINTAINER Diederik Noordhuis (diederikn@intellivoid.net)
 
 ARG DEBIAN_FRONTEND=noninteractive
