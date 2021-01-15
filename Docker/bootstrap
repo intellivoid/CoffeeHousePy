@@ -24,12 +24,12 @@ if [ ! -f /firstrun.pass ]; then
     chmod a+x /CoffeeHousePy/Docker/installer
 
     echo " #### Running installer"
-    /bin/bash /CoffeeHouse/Docker/installer
+    /bin/bash /CoffeeHousePy/Docker/installer
 
     echo "(+) Setting boot flag..."
     touch /firstrun.pass
     echo "[...] Restarting server in detached mode..."
 else
     echo "### Starting main execution point"
-    /bin/bash /CoffeeHouse/Docker/coffeehouse
+    /bin/bash /CoffeeHousePy/Docker/coffeehouse
 fi
