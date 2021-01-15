@@ -102,6 +102,34 @@ def spamdetect():
     print("[SPAMDETECT] Started successfully")
 
 
+def emotion():
+    print("[EMOTION] Warming up")
+
+    current_tries = 0
+    max_tries = 30  # 5 Minutes
+    while True:
+        if current_tries > max_tries:
+            print("[EMOTION] ERROR! Too many attempts")
+            sys.exit(1)
+
+        try:
+            r = requests.post("http://127.0.0.1:5605/", data={"input": "The quick brown fox jumped over the lazy dog"})
+            if r.status_code == 200:
+                print("[EMOTION] OK")
+                break
+            else:
+                print("[EMOTION] Failed, Returned status code {0}, '{1}'".format(str(r.status_code), r.text))
+        except:
+            print("[EMOTION] Failed, request not completed")
+            pass
+
+        print("[EMOTION] Waiting 10 seconds")
+        time.sleep(10)
+        current_tries += 1
+
+    print("[SPAMDETECT] Started successfully")
+
+
 def nsfw():
     print("[NSFW] Warming up")
 
@@ -154,6 +182,7 @@ print("CoffeeHouse-Utils Warmup")
 core_nlp()
 spamdetect()
 langdetect()
+emotion()
 nsfw()
 
 print("OK, CoffeeHouse-Utils seems to be running fine.")
