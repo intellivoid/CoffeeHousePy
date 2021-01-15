@@ -23,6 +23,8 @@ echo "### Starting CoffeeHouse-CoreNLP ###"
 make start_corenlp &
 echo "### Starting CoffeeHouse-NSFW ###"
 make start_nsfw &
+echo "### Starting CoffeeHouse-Emotions ###"
+make start_emotions &
 
 echo "### Checking Service Status ###"
 
@@ -57,6 +59,13 @@ while sleep 60; do
   NSFW_STATUS=$?
   if [ $NSFW_STATUS -ne 0 ]; then
     echo "ERROR: coffeehouse_nsfw has been terminated, terminating container."
+    exit 1
+  fi
+
+  ps aux | grep coffeehouse_emotions | grep -q -v grep
+  EMOTION_STATUS=$?
+  if [ $EMOTION_STATUS -ne 0 ]; then
+    echo "ERROR: coffeehouse_emotion has been terminated, terminating container."
     exit 1
   fi
 

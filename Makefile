@@ -28,6 +28,9 @@ clean_langdetect:
 clean_spamdetect:
 	rm -rf services/spam_detection/build services/spam_detection/dist services/spam_detection/coffeehouse_spamdetection.egg-info
 
+clean_emotions:
+	rm -rf services/emotions/build services/emotions/dist services/emotions/coffeehouse_emotions.egg-info
+
 clean_ping:
 	rm -rf services/ping_service/build services/ping_service/dist services/ping_service/coffeehouse_ping.egg-info
 
@@ -49,6 +52,7 @@ clean:
 	make clean_translation
 	make clean_langdetect
 	make clean_spamdetect
+	make clean_emotions
 	make clean_nsfw
 	make clean_corenlp
 	make clean_ping
@@ -89,6 +93,9 @@ build_langdetect:
 build_spamdetect:
 	cd services/spam_detection; python3 setup.py build; python3 setup.py sdist
 
+build_emotions:
+	cd services/emotions; python3 setup.py build; python3 setup.py sdist
+
 build_translation:
 	cd services/translation; python3 setup.py build; python3 setup.py sdist
 
@@ -110,6 +117,7 @@ build:
 	make buid_translation
 	make build_langdetect
 	make build_spamdetect
+	make build_emotions
 	make build_nsfw
 	make build_corenlp
 	make build_ping
@@ -151,6 +159,9 @@ install_langdetect:
 install_spamdetect:
 	cd services/spam_detection; python3 setup.py install
 
+install_emotions:
+	cd services/emotions; python3 setup.py install
+
 install_translation:
 	cd services/translation; python3 setup.py install
 
@@ -175,6 +186,7 @@ install:
 	make install_translation
 	make install_langdetect
 	make install_spamdetect
+	make install_emotions
 	make install_nsfw
 	make build_corenlp
 	make install_ping
@@ -204,6 +216,9 @@ start_langdetect:
 
 start_spamdetect:
 	python3 -m coffeehouse_spamdetection --start-server
+
+start_emotions:
+	python3 -m coffeehouse_emotions --start-server
 
 start_translation:
 	python3 -m coffeehouse_translation --start-server

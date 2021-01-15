@@ -44,4 +44,5 @@ make start_translate # Starts the translation server, runs on port 5603
 | CoffeeHouse NSFW Classifier    | HTTP     | 5602 |
 | CoffeeHouse Translate          | HTTP     | 5603 |
 | CoffeeHouse CoreNLP            | HTTP     | 5604 |
+| CoffeeHouse Emotions           | HTTP     | 5605 |
 | CoffeeHouse Language Detection | HTTP     | 5606 |
