@@ -17,7 +17,7 @@ if [ ! -f /firstrun.pass ]; then
 
     echo " #### Checking out production branch"
     cd /CoffeeHousePy
-    git checkout nsfw_detection
+    git checkout master
 
     echo " #### Setting permissions"
     chmod a+x /CoffeeHousePy/Docker/coffeehouse
