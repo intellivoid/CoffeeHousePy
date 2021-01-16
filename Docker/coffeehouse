@@ -65,7 +65,7 @@ while sleep 60; do
   ps aux | grep coffeehouse_emotions | grep -q -v grep
   EMOTION_STATUS=$?
   if [ $EMOTION_STATUS -ne 0 ]; then
-    echo "ERROR: coffeehouse_emotion has been terminated, terminating container."
+    echo "ERROR: coffeehouse_emotions has been terminated, terminating container."
     exit 1
   fi
 
