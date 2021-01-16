@@ -43,6 +43,7 @@ class Server(object):
             f.write(base64.b64decode(post_data["input"]))
 
         results = self.classifier.classify(tmp_image)[tmp_image]
+        os.remove(tmp_image)
 
         response = {
             "status": True,
