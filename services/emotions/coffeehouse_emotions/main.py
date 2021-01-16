@@ -14,7 +14,7 @@ class EmotionPrediction(object):
         self.dltc = DLTC()
         self.rf = ResourceFetch()
         self.model_directory = os.path.join(
-            self.rf.fetch("Intellivoid", "CoffeeHouseData-ProfleIO"),
+            self.rf.fetch("Intellivoid", "CoffeeHouseData-ProfileIO"),
             "advanced_sentiments_build"
         )
         self.dltc.load_model_cluster(self.model_directory)
