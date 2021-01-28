@@ -1,6 +1,6 @@
 #!/bin/sh
 # Written by Netkas 14/01/2021
-echo "### Initializing CoffeeHouse-Utils ###"
+echo "### Initializing CoffeeHouse-Utils! ###"
 
 if [ ! -f /firstrun.pass ]; then
     echo "(!) First run! Installing resources..."
