@@ -5,14 +5,24 @@ cd /CoffeeHousePy
 echo "### Checking for updates ###"
 git remote update
 
-UPSTREAM=${1:-'@{u}'}
-LOCAL=$(git rev-parse @)
-BASE=$(git merge-base @ "$UPSTREAM")
+#UPSTREAM=${1:-'@{u}'}
+#LOCAL=$(git rev-parse @)
+#BASE=$(git merge-base @ "$UPSTREAM")
 
-if [ $LOCAL = $BASE ]; then
+#if [ $LOCAL = $BASE ]; then
+#  echo "### Applying update ###"
+#  git pull
+#  make clean install
+#fi
+
+changed=0
+git remote update && git status -uno | grep -q 'Your branch is behind' && changed=1
+if [ $changed = 1 ]; then
   echo "### Applying update ###"
   git pull
   make clean install
+else
+  echo "### CoffeeHouse-Utils is up-to-date ###"
 fi
 
 echo "### Starting CoffeeHouse-LangDetect ###"
